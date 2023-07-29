@@ -1,0 +1,6 @@
+# Test your endpoints
+
+GET http://127.0.0.1:44777/
+Accept: application/json
+
+###

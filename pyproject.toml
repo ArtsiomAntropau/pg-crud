@@ -1,0 +1,13 @@
+[project]
+name = "pg-crud"
+version = "0.1.0"
+description = ""
+dependencies = [
+    "blacksheep~=1.2",
+    "orjson~=3.9",
+    "piccolo[postgres,uvloop,orjson]~=0.119.0",
+    "piccolo-api~=0.57.0",
+    "uvicorn~=0.23.1",
+]
+requires-python = ">=3.11"
+license = {text = "MIT"}
