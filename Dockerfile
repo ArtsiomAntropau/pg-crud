@@ -10,6 +10,6 @@ ENV PATH="/root/.local/bin:${PATH}"
 
 FROM base AS prod
 
-RUN pdm install --prod
+RUN pdm install --prod --no-self
 
 CMD pdm run src/main.py
