@@ -1,15 +1,23 @@
 FROM python:3.11-alpine AS base
 
-COPY src ./
-COPY pdm.lock pyproject.toml ./
+ARG APP_USER=pg-crud
 
-RUN apk add curl gcc python3-dev musl-dev
-RUN curl -sSL https://pdm.fming.dev/dev/install-pdm.py | python3 -
+RUN adduser -D -u 1000 ${APP_USER} && \
+    apk --no-cache add curl gcc python3-dev py3-setuptools musl-dev && \
+    pip install pdm
 
 ENV PATH="/root/.local/bin:${PATH}"
 
 FROM base AS prod
 
-RUN pdm install --prod --no-self
+ENV APP_DIR=/pg-crud
+WORKDIR ${APP_DIR}
 
-CMD pdm run src/main.py
+COPY src pdm.lock pyproject.toml ${APP_DIR}
+
+RUN pdm install --prod --no-self
+RUN chown -R ${APP_USER}:${APP_USER} ${APP_DIR}
+
+CMD pdm run ${APP_DIR}/main.py
+
+USER ${APP_USER}

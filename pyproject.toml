@@ -3,6 +3,7 @@ name = "pg-crud"
 version = "0.1.0"
 description = ""
 dependencies = [
+    "setuptools",
     "blacksheep~=1.2",
     "orjson~=3.9",
     "piccolo[postgres,uvloop,orjson]~=0.119.0",
